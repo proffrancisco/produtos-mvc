@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Produtos</title>
+<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/css/bootstraptheme.min.css}"
+	rel="stylesheet" />
+
+<style>
+.logo-container {
+	background-color: #000000;
+	color: #fff;
+}
+</style>
+
+</head>
+<body>
+	<div class="container">
+		<div class="w-auto p-3 mt-3 logo-container">Produtos</div>
+		<div>
+			<h1 class="display-6">Produto</h1>
+		</div>
+		<form method="POST" th:object="${produto}"  th:action="@{/salvar-produto}">
+		
+		<div class="form-row">		
+			<div><input type="hidden"  th:field="*{id}"></div>  
+			
+			<div class="form-group col-md-6 mt-3">
+	      		<label for="nome">Nome:</label>
+	     	 	<input type="text" class="form-control" th:errorclass="is-invalid" placeholder="Nome do produto" th:field="*{nome}">
+	     	 	<div th:errors="*{nome}" class="invalid-feedback"></div>
+	    	</div>    
+	    	
+	    	<div class="form-group col-md-6 mt-3">
+	      		<label for="nome">SKU:</label>
+	     	 	<input type="text" class="form-control" th:errorclass="is-invalid" placeholder="SKU do produto" th:field="*{sku}">
+	     	 	<div th:errors="*{sku}" class="invalid-feedback"></div>
+	    	</div>
+	    	
+	    	<div class="form-group mt-3">
+			    <label for="exampleFormControlTextarea1">Descrição</label>
+			    <textarea class="form-control" th:field="*{descricao}" rows="3"></textarea>
+			 </div>
+	    	  
+	    	
+	    	<div class="form-group col-md-2 mt-3">
+	      		<label for="nome">Preco:</label>
+	     	 	<input type="number" class="form-control" th:errorclass="is-invalid" placeholder="Preço do produto" th:field="*{preco}">
+	     	 	<div th:errors="*{sku}" class="invalid-feedback"></div>
+	    	</div> 
+		</div>
+		
+			<div>
+				<button type="submit" class="btn btn-light  mt-3">Salvar</button>
+			</div>
+		</form>	
+	</div>
+
+	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>
