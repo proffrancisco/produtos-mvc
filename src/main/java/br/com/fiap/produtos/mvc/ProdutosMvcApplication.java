@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ProdutosMvcApplication {
 
 	public static void main(String[] args) {
+		
 		SpringApplication.run(ProdutosMvcApplication.class, args);
+		
 	}
 
 }
