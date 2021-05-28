@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.fiap.produtos.mvc.dto.Produto;
+import br.com.fiap.produtos.mvc.entity.CategoriaEntity;
 import br.com.fiap.produtos.mvc.entity.ProdutoEntity;
+import br.com.fiap.produtos.mvc.repository.CategoriaRepository;
 import br.com.fiap.produtos.mvc.repository.ProdutoRepository;
 import br.com.fiap.produtos.mvc.service.ProdutoService;
 
@@ -16,6 +18,10 @@ public class ProdutoServiceImpl implements ProdutoService{
 	
 	@Autowired
 	private ProdutoRepository repository;
+	
+	@Autowired
+	private CategoriaRepository categoriaRepository;
+	
 
 	@Override
 	public List<Produto> listaProdutos() {		
@@ -27,6 +33,8 @@ public class ProdutoServiceImpl implements ProdutoService{
 	@Override
 	public Produto salvarProduto(Produto produto) {
 		ProdutoEntity entity = fromTo(produto); 
+		CategoriaEntity categoriaEntity = categoriaRepository.findById(produto.getCategoria().getId()).get();
+		entity.setCategoria(categoriaEntity);
 		entity = repository.save(entity);
 		Produto produtoRetorno = fromTo(entity);
 		return produtoRetorno;

@@ -1,5 +1,7 @@
 package br.com.fiap.produtos.mvc.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,18 +13,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.fiap.produtos.mvc.dto.Categoria;
 import br.com.fiap.produtos.mvc.dto.Produto;
-import br.com.fiap.produtos.mvc.service.impl.ProdutoServiceImpl;
+import br.com.fiap.produtos.mvc.service.CategoriaService;
+import br.com.fiap.produtos.mvc.service.ProdutoService;
 
 @Controller
 public class ProdutoController {
 	
 	@Autowired
-	ProdutoServiceImpl service;
+	ProdutoService service;
+	
+	@Autowired
+	CategoriaService categoriaService;
 	
 	@GetMapping("novo-produto")
 	public ModelAndView homeProduto() {
 		ModelAndView view = new ModelAndView("produto");
+		List<Categoria> categorias = categoriaService.listaCategorias();
+		view.addObject("categorias",categorias);
 		view.addObject(new Produto());
 		return view;
 	}
@@ -41,6 +50,8 @@ public class ProdutoController {
 	public ModelAndView editarProduto(@PathVariable Long id) {		
 		ModelAndView view = new ModelAndView("produto");	
 		Produto produto = service.editarProduto(id);
+		List<Categoria> categorias = categoriaService.listaCategorias();
+		view.addObject("categorias",categorias);
 		view.addObject("produto", produto);
 		return view;		
 	}

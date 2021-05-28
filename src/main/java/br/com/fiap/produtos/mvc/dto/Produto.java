@@ -16,6 +16,9 @@ public class Produto implements Serializable {
 	private String descricao;
 	@NotNull
 	private Double preco;
+	
+	Categoria categoria;
+	
 	public Long getId() {
 		return id;
 	}
@@ -46,5 +49,13 @@ public class Produto implements Serializable {
 	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
+	public Categoria getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+	
+	
 
 }
